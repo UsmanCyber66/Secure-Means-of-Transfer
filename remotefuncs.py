@@ -49,11 +49,10 @@ def getepass(prompt="Enter Password: "):
         
 def serverlogin(message):
     x= message.strip().replace("|", " ").split()
-    u = baseify(sha(x[0])).decode()
-    if os.path.exists(u) == True:
-        with open(u, "r") as f:
+    if os.path.exists(x[0]) == True:
+        with open(x[0], "r") as f:
             data = json.load(f)
-        if data["combohash"] == baseify(sha( x[0]+ x[1])).decode(): 
+        if data["combohash"] == x[1]: 
             print("User authenticated successfully.")
             attr.logged = True
         else:
