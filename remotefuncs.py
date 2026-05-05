@@ -52,7 +52,7 @@ def serverlogin(message):
     if os.path.exists(u) == True:
         with open(u, "r") as f:
             data = json.load(f)
-        if data["combohash"] == baseify(sha(u + x[1])).decode(): 
+        if data["combohash"] == baseify(sha( x[0]+ x[1])).decode(): 
             print("User authenticated successfully.")
         else:
             print("Authentication failed: combohash error")
