@@ -48,7 +48,7 @@ def getepass(prompt="Enter Password: "):
         
 def serverlogin(message):
     x= message.strip().strip("|")
-    u = baseify(sha(x[0]))
+    u = baseify(sha(x[0])).decode()
     if os.path.exists(u) == True:
         with open(u, "r") as f:
             data = json.load(f)
