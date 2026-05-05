@@ -1,8 +1,8 @@
 #remotefuncs.py
-import hashlib
+import hashlib,os, json,base64,getpass
 from cryptography.fernet import Fernet
-import base64
-import getpass
+
+from fastapi import websockets
 
 def sha(x):
     return hashlib.sha256(x.encode()).digest()
@@ -45,3 +45,17 @@ def getepass(prompt="Enter Password: "):
         if pw.strip():  # Ensures it's not empty or just spaces
             return pw
         print("Password cannot be empty!")
+        
+def serverlogin(message):
+    x= message.strip().strip("|")
+    u = baseify(sha(x[0]))
+    if os.path.exists(u) == True:
+        with open(u, "r") as f:
+            data = json.load(f)
+        if data["combohash"] == baseify(sha(u + x[1])).decode(): 
+            print("User authenticated successfully.")
+        else:
+            print("Authentication failed. Incorrect username or password.")
+    else:
+        print("Authentication failed: Incorrect username or password.")
+        

@@ -18,7 +18,6 @@ def add_user():
     username = inpute("Username for new user: ")
     password = getepass()
     combohash = baseify(sha(username + password)).decode()
-    print("User added successfully.")
     data= {
         "combohash": combohash
     }

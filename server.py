@@ -1,19 +1,21 @@
 import asyncio
 import os
-from remotefuncs import encrypt, sha, baseify, attr
+from remotefuncs import encrypt, sha, baseify, attr, serverlogin
 import websockets
-attr.password= "Usman"
-attr.get_key()
+from websockets.exceptions import ConnectionClosed
+global num
+num=0
 async def serveron():
     async def handle_connection(websocket):
-        print("A client connected!")
         try:
-            # This loop keeps the connection open to listen for multiple messages
+            rec=0 
             async for message in websocket:
-                x= message.strip().strip("|")
-                
-                
-        except websockets.exceptions.ConnectionClosedOK:
+                rec=+1
+                if rec==1:
+                    serverlogin(message)
+                else:
+                    print(os.listdir()) #just for testing. 
+        except ConnectionClosed:
             print("Client disconnected gracefully.")
         except Exception as e:
             print(f"Error: {e}")
