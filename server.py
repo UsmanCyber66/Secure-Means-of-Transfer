@@ -7,6 +7,8 @@ global num
 num=0
 async def serveron():
     async def handle_connection(websocket):
+        global num
+        num=0
         try:
             async for message in websocket:
                 num= num+ 1
