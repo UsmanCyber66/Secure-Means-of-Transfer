@@ -64,7 +64,7 @@ async def serverlogin(websocket, message): # Accept the connection object
         cr = await websocket.recv()
         
         # Basic cleanup of the received string
-        if cr in attr.users and cr.encode("utf-8"):
+        if cr in attr.users:
             await websocket.send("Login successful!")
             print("Client authenticated successfully.")
     except Exception as e:
@@ -113,4 +113,4 @@ def update(username, action="add"):
                 f.write(line_content)
 
 def remotocrypt(x):
-    return baseify(sha(x)).decode()
+    return baseify(sha(x)).decode().encode("utf-8")
