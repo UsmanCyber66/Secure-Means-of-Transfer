@@ -2,7 +2,7 @@
 import hashlib,os, json,base64,getpass
 from cryptography.fernet import Fernet
 import asyncio, websockets
-from fastapi import websockets
+import websockets
 import random
 def sha(x):
     return hashlib.sha256(x.encode()).digest()
@@ -47,20 +47,27 @@ def getepass(prompt="Enter Password: "):
             return pw
         print("Password cannot be empty!")
         
-def serverlogin(message):
+# remotefuncs.py - Update these parts:
+
+async def serverlogin(websocket, message): # Add websocket here
     try:    
-        async def login(message):
-            nonce=str(random.randint(100000, 999999))  # Generate a random nonce
-            await websockets.send(nonce)
-            cr = await websockets.recv()
-            cr= cr.strip().replace("|", "").split()
-            if baseify(sha(cr[0])).decode() in os.listdir():
-                await websockets.send("ok")
-                print("ok")
-                attr.logged=True
-                return "Auth Successful"
-            else:
-                return websockets.send("Auth Failed")
-        asyncio.run(login(message))
+        # No need for nested 'async def login' anymore
+        nonce = str(random.randint(100000, 999999))
+        await websocket.send(nonce) # Use the passed connection object
+        
+        cr = await websocket.recv()
+        # Decode if it's bytes, then strip and split
+        if isinstance(cr, bytes): cr = cr.decode()
+        cr_parts = cr.strip().replace("|", "").split()
+        
+        # Simple check for testing
+        if len(cr_parts) > 0 and baseify(sha(cr_parts[0])).decode() in os.listdir():
+            await websocket.send("ok")
+            attr.logged = True
+            return "Auth Successful"
+        else:
+            await websocket.send("Auth Failed")
+            return "Auth Failed"
+            
     except Exception as e:
         print(f"Login error: {e}")
