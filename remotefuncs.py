@@ -49,18 +49,25 @@ def getepass(prompt="Enter Password: "):
         
 # remotefuncs.py - Update these parts:
 
-async def serverlogin(websocket, message): # Add websocket here
+# remotefuncs.py
+
+# REMOVE: from fastapi import websockets
+# KEEP: import websockets
+
+async def serverlogin(websocket, message): # Accept the connection object
     try:    
-        # No need for nested 'async def login' anymore
-        nonce = str(random.randint(100000, 999999))
-        await websocket.send(nonce) # Use the passed connection object
+        # Generate the random nonce for the UC66 handshake
+        nonce = str(random.randint(100000, 999999)) 
+        await websocket.send(nonce) 
         
+        # Receive the combohash from the client
         cr = await websocket.recv()
-        # Decode if it's bytes, then strip and split
+        
+        # Basic cleanup of the received string
         if isinstance(cr, bytes): cr = cr.decode()
         cr_parts = cr.strip().replace("|", "").split()
         
-        # Simple check for testing
+        # Your logic: check if the hash of the username exists as a file
         if len(cr_parts) > 0 and baseify(sha(cr_parts[0])).decode() in os.listdir():
             await websocket.send("ok")
             attr.logged = True
@@ -71,3 +78,4 @@ async def serverlogin(websocket, message): # Add websocket here
             
     except Exception as e:
         print(f"Login error: {e}")
+        return "Error"
