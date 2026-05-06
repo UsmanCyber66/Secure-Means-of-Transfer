@@ -9,7 +9,6 @@ try:
             print("Client connected.")
             try:
                 async for message in websocket:
-                    num=+ 1
                     if attr.logged == False:
                         serverlogin(message)
                     else:
