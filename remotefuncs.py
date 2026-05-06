@@ -1,12 +1,11 @@
 #remotefuncs.py
-import hashlib,os, json,base64,getpass
+import hashlib,os, json,base64,getpass,asyncio, websockets,random
 from cryptography.fernet import Fernet
-import asyncio, websockets
-import websockets
-import random
+
 def sha(x):
     return hashlib.sha256(x.encode()).digest()
-
+def shasafe(x):
+    return hashlib.sha256(x.encode()).hexdigest()
 def baseify(x):
     return base64.urlsafe_b64encode(x)
 class attr:
