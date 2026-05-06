@@ -4,3 +4,4 @@ passwords efficiently, all data is sent through a lightweight WebSocket. The dat
 user by first hashing it with sha256 then wrapping it in base64. The Login authentication is done using a Nonce(Number used once) . This tool is built on the assumption that someone is **Always watching**
 
 **                                                                THIS TOOL IS LICENSED UNDER GPLv3 **
+#ProudlyPython
