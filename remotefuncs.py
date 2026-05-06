@@ -56,8 +56,10 @@ def serverlogin(message):
             cr= cr.strip().replace("|", "").split()
             if baseify(sha(cr[0])).decode() in os.listdir():
                 await websockets.send("ok")
+                print("ok")
                 attr.logged=True
             else:
                 return websockets.send("Auth Failed")
+        asyncio.run(login(message))
     except Exception as e:
         print(f"Login error: {e}")
