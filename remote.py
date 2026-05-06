@@ -31,9 +31,9 @@ def add_user():
 @remove.command("user")
 def remove_user():
     
-    username = inpute("Username to remove: ")
+    username = inpute("Username to remove: ").encode('utf-8')
     
-    password = getepass()
+    password = getepass().encode('utf-8')
     
     combohash = remotocrypt(username + password)
     

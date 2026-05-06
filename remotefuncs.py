@@ -119,4 +119,4 @@ def update(username, action="add"):
                 f.write(line_content)
 
 def remotocrypt(x):
-    return baseify(sha(x)).decode().encode("utf-8")
+    return baseify(sha(x)).decode('utf-8')
