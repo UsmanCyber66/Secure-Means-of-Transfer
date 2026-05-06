@@ -1,6 +1,6 @@
 #client.py
 import websockets,asyncio
-from remotefuncs import baseify, inpute, remotocrypt,noncify,getepass, sha
+from smotfuncs import baseify, inpute, remotocrypt,noncify,getepass, sha
 async def main():
     uri = "ws://localhost:8765"
     async with websockets.connect(uri) as websocket:
