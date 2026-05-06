@@ -12,3 +12,5 @@ async def main():
         await websocket.send(auth_token)
         response = await websocket.recv()
         print(response)
+        
+asyncio.run(main())
