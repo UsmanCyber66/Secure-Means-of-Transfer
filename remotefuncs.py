@@ -63,7 +63,7 @@ async def serverlogin(websocket, message): # Accept the connection object
         cr = await websocket.recv()
         
         # Basic cleanup of the received string
-        if cr ==baseify(shasafe('Nt5SeyrdEyxqwuzdtbGiM6DsDAwceLwa6JYQK8qhB3Q=' + str(nonce))).decode():
+        if cr ==baseify(sha('Nt5SeyrdEyxqwuzdtbGiM6DsDAwceLwa6JYQK8qhB3Q=' + str(nonce))).decode():
             websocket.send("Login successful!")
             print("Client authenticated successfully.")
     except Exception as e:
