@@ -13,7 +13,7 @@ async def handle_connection(websocket):
             print(f"Received: {message}")
             
             # Use the global attribute to check auth status
-            if not attr.logged:
+            if attr.logged== False:
                 # We pass the websocket object so serverlogin can send the nonce
                 result = await serverlogin(websocket, message)
                 print(f"Auth Result: {result}")
