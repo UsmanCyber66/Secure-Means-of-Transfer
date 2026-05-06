@@ -5,6 +5,7 @@ import websockets
 from websockets.exceptions import ConnectionClosed
 async def serveron():
     async def handle_connection(websocket):
+        print("Client connected.")
         try:
             async for message in websocket:
                 num=+ 1

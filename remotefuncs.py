@@ -3,7 +3,7 @@ import hashlib,os, json,base64,getpass
 from cryptography.fernet import Fernet
 import asyncio, websockets
 from fastapi import websockets
-import websocket, random
+import random
 def sha(x):
     return hashlib.sha256(x.encode()).digest()
 
