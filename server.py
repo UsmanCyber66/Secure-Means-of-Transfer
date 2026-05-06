@@ -3,7 +3,7 @@ import os
 import websockets
 from websockets.exceptions import ConnectionClosed
 # Importing your custom utilities from remotefuncs
-from remotefuncs import encrypt, sha, baseify, attr, serverlogin
+from smotfuncs import encrypt, sha, baseify, attr, serverlogin
 
 async def handle_connection(websocket):
     print("Client connected.")
@@ -25,8 +25,10 @@ async def handle_connection(websocket):
                 
     except ConnectionClosed:
         print("Client disconnected gracefully.")
+        attr.logged = False  # Reset auth status on disconnect
     except Exception as e:
         print(f"Error in connection handler: {e}")
+        attr.logged = False  # Reset auth status on error
 
 async def serveron():
     # Setting up the server on your HP laptop's localhost
