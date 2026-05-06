@@ -3,7 +3,10 @@ import hashlib,os, json,base64,getpass,asyncio, websockets,random
 from cryptography.fernet import Fernet
 
 def sha(x):
-    return hashlib.sha256(x.encode()).digest()
+    if isinstance(x, str):
+        return hashlib.sha256(x.encode()).digest()
+    else:
+        return hashlib.sha256(x).digest()
 def shasafe(x):
     return hashlib.sha256(x.encode()).hexdigest()
 def baseify(x):
@@ -81,7 +84,8 @@ import ast
 import ast
 def noncify(username, nonce):
     notnonce=nonce.encode() if isinstance(nonce, str) else nonce
-    return remotocrypt(username + notnonce)
+    username_bytes = username.encode() if isinstance(username, str) else username
+    return remotocrypt(username_bytes + notnonce)
 def update(username, action="add"):
     file_path = "remotefuncs.py"
     
