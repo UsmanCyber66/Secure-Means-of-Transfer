@@ -1,9 +1,9 @@
 #remotefuncs.py
 import hashlib,os, json,base64,getpass
 from cryptography.fernet import Fernet
-
+import asyncio, websockets
 from fastapi import websockets
-
+import websocket, random
 def sha(x):
     return hashlib.sha256(x.encode()).digest()
 
@@ -48,15 +48,13 @@ def getepass(prompt="Enter Password: "):
         print("Password cannot be empty!")
         
 def serverlogin(message):
-    x= message.strip().replace("|", " ").split()
-    if os.path.exists(x[0]) == True:
-        with open(x[0], "r") as f:
-            data = json.load(f)
-        if data["combohash"] == x[1]: 
-            print("User authenticated successfully.")
-            attr.logged = True
+    async def login(message):
+        nonce=str(random.randint(100000, 999999))  # Generate a random nonce
+        await websocket.send(nonce)
+        cr = await websocket.recv()
+        cr= cr.strip().replace("|", "").split()
+        if baseify(sha(cr[0])).decode() in os.listdir():
+            await websocket.send("ok")
+            attr.logged=True
         else:
-            print("Authentication failed: combohash error")
-    else:
-        print("Authentication failed: user not found")
-        
+            return websocket.send("Auth Failed")
