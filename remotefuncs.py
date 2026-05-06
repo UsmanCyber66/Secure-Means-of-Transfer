@@ -83,7 +83,7 @@ def update_persistent_list(new_username):
         for i in lines:
             if i== 16:#i want it to be line 16
             # Look for the specific line defining the user list
-                if "user =" in i:
+                if "users =" in i:
                     # This logic assumes 'user' is a list. 
                     # We append the new name to the existing representation.
                     current_list_str = i.split("=")[1].strip()
@@ -96,7 +96,7 @@ def update_persistent_list(new_username):
                         current_list.append(new_username)
                 
                 # Rewrite the line with the updated list
-                    f.write(f"    user = {current_list}\n")
+                    f.write(f"    users = {current_list}\n")
                 else:
                     f.write(i)
                 
