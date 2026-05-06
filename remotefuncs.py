@@ -64,9 +64,14 @@ async def serverlogin(websocket, message): # Accept the connection object
         cr = await websocket.recv()
         
         # Basic cleanup of the received string
-        if cr in attr.users:
-            await websocket.send("Login successful!")
-            print("Client authenticated successfully.")
+        for i in attr.users:
+            if noncify(i, nonce) == cr:
+                attr.logged = True
+                await websocket.send("Login successful!")
+                print("Client authenticated successfully.")
+                break
+        else:
+            await websocket.send("Login failed!")
     except Exception as e:
         print(f"Login error: {e}")
         return "Error"
