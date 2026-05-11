@@ -19,7 +19,6 @@ async def handle_connection(websocket):
                 
                 print(f"Received: {message}")
                 await forever(websocket, message)
-    
     except ConnectionClosed:
         print("Client disconnected gracefully.")
         attr.logged = False
