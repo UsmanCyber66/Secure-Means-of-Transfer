@@ -13,6 +13,6 @@ async def main():
         await websocket.send("ls") 
         print(response)
         while True:
-            print(websocket.recv())
+            print(await websocket.recv())
         
 asyncio.run(main())
