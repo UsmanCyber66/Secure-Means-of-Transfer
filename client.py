@@ -10,6 +10,7 @@ async def main():
         auth_token = noncify(username, nonce)
         await websocket.send(auth_token)
         response = await websocket.recv()
+        await websocket.send("ls") 
         print(response)
         
 asyncio.run(main())
