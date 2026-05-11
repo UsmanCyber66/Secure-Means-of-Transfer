@@ -7,18 +7,11 @@ from smotfuncs import encrypt, sha, baseify, attr, serverlogin, forever
 async def handle_connection(websocket):
     print("Client connected.")
     try:
-        message = await websocket.recv()
-        print(f"Received: {message}")
-        
-        if attr.logged == False:
-            result = await serverlogin(websocket, message)
-            print(f"Auth Result: {result}")
-        
-        if attr.logged:
-            async for message in websocket:
-                
-                print(f"Received: {message}")
-                await forever(websocket, message)
+        async for message in websocket:
+            if attr.logged==False:
+                await serverlogin(websocket,message)
+            else:
+                await forever(websocket,message)
     except ConnectionClosed:
         print("Client disconnected gracefully.")
         attr.logged = False
