@@ -125,4 +125,7 @@ def remotocrypt(x):
     return baseify(sha(x)).decode('utf-8')
 async def forever(websocket, message):
     if message in attr.messages:
-        await websocket.send(eval(attr.messages[message]))
+        
+        result = eval(attr.messages[message])
+        
+        await websocket.send(str(result))
