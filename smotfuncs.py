@@ -78,7 +78,6 @@ async def serverlogin(websocket, message): # Accept the connection object
     except Exception as e:
         print(f"Login error: {e}")
         return "Error"
-    
 import ast
 
 import ast
