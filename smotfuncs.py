@@ -57,15 +57,20 @@ async def serverlogin(websocket, message):
         
         
         cr = await websocket.recv()
-        
-        for i in attr.users:
-            if noncify(i, nonce) == cr:
-                attr.logged = True
-                await websocket.send("Login successful!")
-                print("Client authenticated successfully.")
-                break
+        cr = cr.strip().replace("|"," ").split()
+        if len(cr) ==2:
+            for i in attr.users:
+                if noncify(i, nonce) == cr[0]:
+                    with open(cr[1], 'r') as f:
+                        data=json.load(f)
+                    if cr[1]==data["combohash"]:
+                        attr.logged = True
+                        websocket.send("Login Completed!")
+                        print("Client Authenticated Successfully!")
+            else:
+                await websocket.send("Login failed!")
         else:
-            await websocket.send("Login failed!")
+            websocket.send("Invalid Format\n Login Failed!")
     except Exception as e:
         print(f"Login error: {e}")
         return "Error"
