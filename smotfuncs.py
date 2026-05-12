@@ -1,5 +1,4 @@
-#remotefuncs.py
-import hashlib,os, json,base64,getpass,asyncio, websockets,random
+import hashlib,os, json,base64,getpass,asyncio, websockets,random,ast
 from cryptography.fernet import Fernet
 
 def sha(x):
@@ -19,7 +18,7 @@ class attr:
     users = ['Nt5SeyrdEyxqwuzdtbGiM6DsDAwceLwa6JYQK8qhB3Q=']
     @classmethod
     def get_key(cls):
-        # This calculates the key "on the fly" using the CURRENT password
+        
         return baseify(sha(cls.password))
 
 def encrypt(data) :
@@ -38,35 +37,27 @@ def get(x):
 def inpute(prompt):
     while True:
         value = input(prompt).strip()
-        if value:  # This checks if the string is NOT empty
+        if value:  
             return value
         print("Input cannot be empty. Please try again.")
         
 def getepass(prompt="Enter Password: "):
     while True:
-        # getpass hides the typing in the terminal
         pw = getpass.getpass(prompt)
-        if pw.strip():  # Ensures it's not empty or just spaces
+        if pw.strip():  
             return pw
         print("Password cannot be empty!")
         
-# smotfuncs.py - Update these parts:
 
-# smotfuncs.py
-
-# REMOVE: from fastapi import websockets
-# KEEP: import websockets
-
-async def serverlogin(websocket, message): # Accept the connection object
+async def serverlogin(websocket, message): 
     try:    
-        # Generate the random nonce for the UC66 handshake
+        
         nonce = str(random.randint(100000, 999999)) 
         await websocket.send(nonce) 
         
-        # Receive the combohash from the client
+        
         cr = await websocket.recv()
         
-        # Basic cleanup of the received string
         for i in attr.users:
             if noncify(i, nonce) == cr:
                 attr.logged = True
@@ -78,9 +69,8 @@ async def serverlogin(websocket, message): # Accept the connection object
     except Exception as e:
         print(f"Login error: {e}")
         return "Error"
-import ast
 
-import ast
+
 def noncify(username, nonce):
     notnonce=nonce.encode() if isinstance(nonce, str) else nonce
     username_bytes = username.encode() if isinstance(username, str) else username
@@ -98,7 +88,7 @@ def update(username, action="add"):
     with open(file_path, "w") as f:
         for line_num, line_content in enumerate(lines, 1):
             if line_num == 16 and "users =" in line_content:
-                # Extract and parse the list
+                
                 parts = line_content.split("=")
                 current_list_str = parts[1].strip()
                 
@@ -107,7 +97,7 @@ def update(username, action="add"):
                 except Exception:
                     current_list = []
                 
-                # Logic for Add vs Remove
+                
                 if action == "add":
                     if username not in current_list:
                         current_list.append(remotocrypt(username))
@@ -115,10 +105,10 @@ def update(username, action="add"):
                     if username in current_list:
                         current_list.remove(remotocrypt(username))
 
-                # Write back the modified line
+                
                 f.write(f"    users = {current_list}\n")
             else:
-                # Keep everything else exactly the same
+                
                 f.write(line_content)
 
 def remotocrypt(x):
