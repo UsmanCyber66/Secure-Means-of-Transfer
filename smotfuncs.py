@@ -70,7 +70,7 @@ async def serverlogin(websocket, message):
             else:
                 await websocket.send("Login failed!")
         else:
-            websocket.send("Invalid Format\n Login Failed!")
+            await websocket.send("Invalid Format\n Login Failed!")
     except Exception as e:
         print(f"Login error: {e}")
         return "Error"
