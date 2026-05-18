@@ -62,7 +62,8 @@ async def serverlogin(websocket, message):
         for i in attr.users:
             if noncify(i, nonce) == cr[0]:
                 with open(i,'r') as f:
-                    data=json.read(f)
+                    file=f.read()
+                    data=json.load(file)
                 if noncify(data["combohash"], nonce)== cr[1]:
                     attr.logged = True
                 await websocket.send("Login successful!")
