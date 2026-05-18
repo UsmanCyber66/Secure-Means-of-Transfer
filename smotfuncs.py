@@ -61,7 +61,7 @@ async def serverlogin(websocket, message):
         
         for i in attr.users:
             if noncify(i, nonce) == cr[0]:
-                with open(cr[0],'r') as f:
+                with open(i,'r') as f:
                     data=json.read(f)
                 if noncify(data["combohash"], nonce)== cr[1]:
                     attr.logged = True
