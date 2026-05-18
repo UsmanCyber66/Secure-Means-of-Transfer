@@ -56,11 +56,14 @@ async def serverlogin(websocket, message):
         await websocket.send(nonce) 
         
         
-        cr = await websocket.recv()
+        cr = await websocket.recv().strip().replace("|", "").split()
         
         for i in attr.users:
-            if noncify(i, nonce) == cr:
-                attr.logged = True
+            if noncify(i, nonce) == cr[0]:
+                with open(cr[0],'r') as f:
+                    data=json.read(f)
+                if noncify(data["combohash"], nonce)== cr[1]:
+                    attr.logged = True
                 await websocket.send("Login successful!")
                 print("Client authenticated successfully.")
                 break
