@@ -10,7 +10,7 @@ async def main():
         username = inpute("Username: ")
         passwd=getepass("Password:")
         usertoken=noncify(baseify(sha(username)), nonce)
-        combohash= noncify(username+passwd, nonce) 
+        combohash= noncify(baseify(sha(username))+remotocrypt(passwd), nonce) 
         auth_token = str(usertoken)+ "|" + str(combohash)
         await websocket.send(auth_token)
         response = await websocket.recv()
