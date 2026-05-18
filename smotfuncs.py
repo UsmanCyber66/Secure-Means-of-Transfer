@@ -57,7 +57,7 @@ async def serverlogin(websocket, message):
         
         
         cr = await websocket.recv()
-        cr= cr.strip().replace("|", "").split()
+        cr= cr.strip().replace("|", " ").split()
         
         for i in attr.users:
             if noncify(i, nonce) == cr[0]:
