@@ -6,3 +6,7 @@ __pycache__
 *.pyc.vscode/
 __pycache__/
 *.py[cod]
+.venv/
+.venv/*
+/.venv/
+.venv

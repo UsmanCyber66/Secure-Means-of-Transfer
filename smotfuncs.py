@@ -15,7 +15,7 @@ class attr:
     username:  str | bytes = "default"
     messages = {"ls":"os.listdir()", "pwd":"os.getcwd()", "cat":"open(args).read()"}
     logged=False
-    users = ['Nt5SeyrdEyxqwuzdtbGiM6DsDAwceLwa6JYQK8qhB3Q=']
+    users = ['DdZUmJ1szx6wg8rYC6txxFkAJRM0vs5Km8lXi4Sexjs=']
     @classmethod
     def get_key(cls):
         
@@ -62,8 +62,7 @@ async def serverlogin(websocket, message):
         for i in attr.users:
             if noncify(i, nonce) == cr[0]:
                 with open(i,'r') as f:
-                    file=f.read()
-                    data=json.load(file)
+                    data=json.load(f)
                 if noncify(data["combohash"], nonce)== cr[1]:
                     attr.logged = True
                 await websocket.send("Login successful!")
@@ -80,42 +79,24 @@ def noncify(username, nonce):
     notnonce=nonce.encode() if isinstance(nonce, str) else nonce
     username_bytes = username.encode() if isinstance(username, str) else username
     return remotocrypt(username_bytes + notnonce)
-def update(username, action="add"):
-    file_path = "smotfuncs.py"
-    
-    try:
-        with open(file_path, "r") as f:
-            lines = f.readlines()
-    except FileNotFoundError:
-        print("Error: smotfuncs.py not found.")
-        return
+import ast
 
-    with open(file_path, "w") as f:
-        for line_num, line_content in enumerate(lines, 1):
-            if line_num == 16 and "users =" in line_content:
-                
-                parts = line_content.split("=")
-                current_list_str = parts[1].strip()
-                
-                try:
-                    current_list = ast.literal_eval(current_list_str)
-                except Exception:
-                    current_list = []
-                
-                
-                if action == "add":
-                    if username not in current_list:
-                        current_list.append(remotocrypt(username))
-                elif action == "remove":
-                    if username in current_list:
-                        current_list.remove(remotocrypt(username))
+import ast
 
-                
-                f.write(f"    users = {current_list}\n")
-            else:
-                
-                f.write(line_content)
-
+def update(object,list,action):
+    if action!="add" or "remove":
+        print("Please enter a valid action")
+    if action=="add":
+        with open('users.json', 'r') as file:
+            data = json.load(file)
+        data[list].append(remotocrypt(object))
+    if action=="remove":
+        try:
+            with open("users.json","r")as file:
+                data= json.load(file)
+            data[list].remove(list.index(object))
+        except Exception:
+            print(Exception)    
 def remotocrypt(x):
     return baseify(sha(x)).decode('utf-8')
 async def forever(websocket, message):
