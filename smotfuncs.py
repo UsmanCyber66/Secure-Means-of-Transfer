@@ -28,7 +28,8 @@ def encrypt(data) :
 def byte(file):
     with open(file, "rb") as f:
         return f.read() 
-def get(x):
+def get(x, list):
+    import json
     try:    
         with open(x, "r") as f:
             return f.read()
@@ -84,19 +85,21 @@ import ast
 import ast
 
 def update(object,list,action):
-    if action!="add" or "remove":
-        print("Please enter a valid action")
-    if action=="add":
-        with open('users.json', 'r') as file:
-            data = json.load(file)
-        data[list].append(remotocrypt(object))
-    if action=="remove":
-        try:
-            with open("users.json","r")as file:
-                data= json.load(file)
-            data[list].remove(list.index(object))
-        except Exception:
-            print(Exception)    
+    try:
+        if action != "add" or "remove":
+            print("select a valid action")
+        if action== "add":
+            with open("users.json","r") as f:
+                data= json.load(f)
+                data[list].append(object)
+        if action== "remove":
+            with open("users.json","r") as f:
+                data= json.load(f)
+                data[list].remove(object)
+        with open("users.json", "w") as f:
+            json.dump(data,f,indent=4)
+    except Exception as e:
+        print(f"Error:{e}")
 def remotocrypt(x):
     return baseify(sha(x)).decode('utf-8')
 async def forever(websocket, message):

@@ -27,7 +27,7 @@ def add_user():
     else:
         with open(baseify(sha(username)), "w") as f:
             json.dump(data, f, indent=4)
-    update(username, "users","add")
+    update(username, "users",action="add")
 @remove.command("user")
 def remove_user():
     
