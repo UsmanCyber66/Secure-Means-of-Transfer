@@ -14,20 +14,7 @@ app.add_typer(add, name="add")
 
 
 @add.command("user")
-def add_user():
-    username = inpute("Username for new user: ")
-    password = getepass()
-    combohash = remotocrypt(username + password)
-    data= {
-        "combohash": combohash
-    }
-    file=baseify(sha(username))
-    if os.path.exists(file):
-        print("User already exists. Please choose a different username.")
-    else:
-        with open(baseify(sha(username)), "w") as f:
-            json.dump(data, f, indent=4)
-    update(username, "users",action="add")
+
 @remove.command("user")
 def remove_user():
     

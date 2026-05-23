@@ -108,3 +108,18 @@ async def forever(websocket, message):
         result = eval(attr.messages[message])
         
         await websocket.send(str(result))
+
+def add_user():
+    username = inpute("Username for new user: ")
+    password = getepass()
+    combohash = remotocrypt(username + password)
+    data= {
+        "combohash": combohash
+    }
+    file=baseify(sha(username))
+    if os.path.exists(file):
+        print("User already exists. Please choose a different username.")
+    else:
+        with open(baseify(sha(username)), "w") as f:
+            json.dump(data, f, indent=4)
+    update(username, "users",action="add")
