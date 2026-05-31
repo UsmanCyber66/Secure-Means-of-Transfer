@@ -1,6 +1,6 @@
 <p align="center">
   <picture>
-    <img src="./assets/LOGO.png" alt="SMoT Logo" width="500" style="max-width: 100%; border-radius: 20px;">
+    <img src="./assets/LOGO_rounded.png" alt="SMoT Logo" width="500" style="max-width: 100%; border-radius: 20px;">
   </picture>
 </p>
 
