@@ -28,5 +28,6 @@ Clone it using
 git clone https://github.com/UsmanCyber66/Secure-Means-of-Transfer
 ```
 
-### *This Software is licensed Under The GNU General Public License v3*
+# License 
+*This Software is licensed Under The GNU General Public License v3*
 #ProudlyPython
