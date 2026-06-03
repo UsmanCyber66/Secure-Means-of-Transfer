@@ -3,7 +3,7 @@
     <img src="./assets/LOGO_ROUNDED.png" alt="SMoT Logo" width="500" style="max-width: 100%; border-radius: 20px;">
   </picture>
 </p>
-
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue)
 # Secure Means of Transfer
 Secure Means of Transfer, or SMoT is a small Python tool that is built for fast and secure file transfers. SMoT uses SHA256 to hash and store passwords. Logins are authenticated through a custom nonce challenge similar to HMAC. 
 ## The Nonce challenge : 
