@@ -13,7 +13,7 @@ The Server sends a nonce, The client sends back an authentication token + comman
 ### Step 2: Check Combohash
 The Username now checked, the server now opens a JSON file that is named `base64(sha256(username)) that contains the combohash, the server encrypts the present combohash with the nonce and compares it to the token which is after the first '|' symbol , if it matches, we move to Step3
 ### Step 3 : Execute command
-The user now fully recognized, the server now checks the command placed after the second '|' symbol against its list of allowed commands. If it is allowed, then the server executes it using ` eval(command) ` and returns the output to the client.   
+The user now fully recognized, the server now checks the command placed after the second '|' symbol against its dictionary of mapped commands, if the command matches any of those, then the command which it is mapped to. For example: `dictionary={'listdir':'ls'} #ls is the command listdir is mapped to`. If it is allowed, then the server executes it using  and returns the output to the client.   
 **NOTE: Tool is Still under development**
 ## Why SMoT?
  - It's written in Python.
