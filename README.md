@@ -3,13 +3,13 @@
     <img src="./assets/LOGO_ROUNDED.png" alt="SMoT Logo" width="500" style="max-width: 100%; border-radius: 20px;"> 
   </picture>
 
+</div>
+
 
 ![GPLv3](https://img.shields.io/badge/License-GNU_GPL_v3-blue)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue)
 
-
-</div>
 
 
 # Secure Means of Transfer
