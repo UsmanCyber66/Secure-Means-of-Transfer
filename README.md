@@ -1,8 +1,11 @@
 <p align="center">
   <picture>
-    <img src="./assets/LOGO_ROUNDED.png" alt="SMoT Logo" width="500" style="max-width: 100%; border-radius: 20px;">
+    <img src="./assets/LOGO_ROUNDED.png" alt="SMoT Logo" width="500" style="max-width: 100%; border-radius: 20px;"> 
   </picture>
-  <picture>
+  
+</p>
+<p>
+<picture>
     <img src="https://img.shields.io/badge/contributions-welcome-blue" alt="contributions welcome" style="border-radius:20px" >
   </picture>
 </p>
