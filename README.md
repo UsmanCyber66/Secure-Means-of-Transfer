@@ -4,7 +4,7 @@
   </picture>
 
 #
-<img src="https://img.shields.io/badge/License-GNU_GPL_v3-blue" width=600> 
+<img src="https://img.shields.io/badge/License-GNU_GPL_v3-blue" width=200> 
 ![GPLv3](https://img.shields.io/badge/License-GNU_GPL_v3-blue)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-blue)
